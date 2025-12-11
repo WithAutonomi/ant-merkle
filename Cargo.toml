@@ -1,11 +1,11 @@
 [package]
-name = "rs_merkle"
-version = "1.5.0"
+name = "ant-merkle"
+version = "1.5.1"
 authors = ["Anton Suprunchuk <anton.suprunchuk@gmail.com>"]
-description = "The most advanced Merkle Tree library for Rust. Supports creating and verifying proofs, multi-proofs, as well as advanced features, such as tree diffs, transactional changes, and rollbacks"
+description = "The most advanced Merkle Tree library for Rust. Supports creating and verifying proofs, multi-proofs, as well as advanced features, such as tree diffs, transactional changes, and rollbacks. Forked for use with the Autonomi network."
 edition = "2018"
 license = "Apache-2.0/MIT"
-repository = "https://github.com/antouhou/rs-merkle"
+repository = "https://github.com/maidsafe/ant-merkle"
 documentation = "https://docs.rs/rs_merkle/"
 readme = "README.md"
 keywords = ["merkle", "tree", "proof", "hash", "multiproof",]
