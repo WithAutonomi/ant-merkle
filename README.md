@@ -64,5 +64,9 @@ Also, see the list of contributors who participated in this project.
 
 ## License
 
-This project is licensed under the MIT License - see the 
-[LICENSE.md](./LICENSE.md) file for details
+Licensed under either of
+
+- MIT license ([LICENSE-MIT](LICENSE-MIT) or https://opensource.org/licenses/MIT)
+- Apache License, Version 2.0 ([LICENSE-APACHE](LICENSE-APACHE) or https://www.apache.org/licenses/LICENSE-2.0)
+
+at your option.
