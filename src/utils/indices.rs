@@ -2,7 +2,7 @@ use crate::{prelude::*, utils};
 use alloc::collections::BTreeMap;
 
 pub fn is_left_index(index: usize) -> bool {
-    index % 2 == 0
+    index.is_multiple_of(2)
 }
 
 pub fn get_sibling_index(index: usize) -> usize {
@@ -42,7 +42,7 @@ pub fn uneven_layers(tree_leaves_count: usize) -> BTreeMap<usize, usize> {
     let mut uneven_layers = BTreeMap::new();
 
     for index in 0..depth {
-        let uneven_layer = leaves_count % 2 != 0;
+        let uneven_layer = !leaves_count.is_multiple_of(2);
         if uneven_layer {
             uneven_layers.insert(index, leaves_count);
         }
@@ -88,5 +88,5 @@ pub fn proof_indices_by_layers(
 }
 
 pub fn div_ceil(x: usize, y: usize) -> usize {
-    x / y + if x % y != 0 { 1 } else { 0 }
+    x / y + if !x.is_multiple_of(y) { 1 } else { 0 }
 }

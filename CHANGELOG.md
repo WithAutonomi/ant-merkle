@@ -1,3 +1,28 @@
+# Unreleased
+
+### Fixes
+
+* `MerkleTree::proof_from_node` returns `None` for a node index that doesn't exist at the given level, as its documentation says. It used to return a proof for the missing node.
+* The tests, examples and doc tests compile again. They still imported `rs_merkle` after the crate was renamed in 1.5.1.
+
+### Tests
+
+* Tamper tests check that `MerkleProof::verify` rejects a wrong root, proof hash, leaf hash, leaf index, leaf count or truncated proof, and pin two properties inherited from rs-merkle: the root doesn't commit to the leaf count, and trailing proof hashes are ignored.
+
+### Other
+
+* Cargo.toml `repository` and `documentation` now point at WithAutonomi/ant-merkle and docs.rs/ant-merkle.
+
+
+# 1.5.1 (2025-12-11)
+
+Forked from rs-merkle 1.5.0 and published as `ant-merkle`.
+
+### Features
+
+* `MerkleTree::get_nodes_at_level` and `MerkleTree::proof_from_node`: proofs from an inner node to the root ([#1](https://github.com/WithAutonomi/ant-merkle/pull/1))
+
+
 # [1.5.0](https://github.com/antouhou/rs-merkle/compare/v1.4.2...v1.5.0) (2025-02-24)
 
 

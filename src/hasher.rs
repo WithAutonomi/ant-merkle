@@ -9,7 +9,7 @@ use core::mem;
 /// This example shows how to implement the sha256 algorithm
 ///
 /// ```
-/// use rs_merkle::{Hasher};
+/// use ant_merkle::{Hasher};
 /// use sha2::{Sha256, Digest, digest::FixedOutput};
 ///
 /// #[derive(Clone)]

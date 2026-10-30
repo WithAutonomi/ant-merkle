@@ -5,58 +5,45 @@ on:
     branches: [ master ]
   pull_request:
     branches: [ master ]
+  workflow_call:
+
+permissions:
+  contents: read
 
 jobs:
   test:
     runs-on: ubuntu-latest
     steps:
-    - uses: actions/checkout@v2
-    - name: Setup Rust toolchain
-      uses: actions-rs/toolchain@v1
-      with:
-        toolchain: stable
-        profile: minimal
-        override: true
-    - name: Run tests
-      run: cargo test
+      - uses: actions/checkout@v4
+      - uses: dtolnay/rust-toolchain@stable
+      - name: Run tests
+        run: cargo test
+      - name: Run tests (all features)
+        run: cargo test --all-features
   no_std_build:
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/checkout@v2
-      - name: Setup Rust toolchain
-        uses: actions-rs/toolchain@v1
+      - uses: actions/checkout@v4
+      - uses: dtolnay/rust-toolchain@stable
         with:
-          toolchain: stable
-          profile: minimal
-          override: true
-          target: thumbv7em-none-eabi
+          targets: thumbv7em-none-eabi
       - name: Build without std
         run: cargo build --no-default-features --target thumbv7em-none-eabi
   lint:
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/checkout@v2
-      - name: Setup Rust toolchain
-        uses: actions-rs/toolchain@v1
+      - uses: actions/checkout@v4
+      - uses: dtolnay/rust-toolchain@stable
         with:
-          toolchain: stable
-          profile: minimal
-          override: true
-      - name: Install Clippy
-        run: rustup component add clippy
+          components: clippy
       - name: Run linter
-        run: cargo clippy -- -D warnings
+        run: cargo clippy --all-features -- -D warnings
   format:
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/checkout@v2
-      - name: Setup Rust toolchain
-        uses: actions-rs/toolchain@v1
+      - uses: actions/checkout@v4
+      - uses: dtolnay/rust-toolchain@stable
         with:
-          toolchain: stable
-          profile: minimal
-          override: true
-      - name: Install rustfmt
-        run: rustup component add rustfmt
+          components: rustfmt
       - name: Check format
         run: cargo fmt --all -- --check

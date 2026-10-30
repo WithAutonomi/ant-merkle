@@ -19,7 +19,7 @@ impl MerkleProofSerializer for DirectHashesOrder {
     fn deserialize<T: Hasher>(bytes: &[u8]) -> Result<MerkleProof<T>, Error> {
         let hash_size = T::hash_size();
 
-        if bytes.len() % hash_size != 0 {
+        if !bytes.len().is_multiple_of(hash_size) {
             return Err(Error::wrong_proof_size(bytes.len(), hash_size));
         }
 

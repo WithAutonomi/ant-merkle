@@ -28,7 +28,7 @@ impl<T: Hasher> MerkleTree<T> {
     /// # Examples
     ///
     /// ```
-    /// use rs_merkle::{MerkleTree, algorithms::Sha256};
+    /// use ant_merkle::{MerkleTree, algorithms::Sha256};
     ///
     /// let merkle_tree: MerkleTree<Sha256> = MerkleTree::new();
     ///
@@ -47,7 +47,7 @@ impl<T: Hasher> MerkleTree<T> {
     /// ## Examples
     ///
     /// ```
-    /// # use rs_merkle::{MerkleTree, MerkleProof, algorithms::Sha256, Hasher, Error, utils};
+    /// # use ant_merkle::{MerkleTree, MerkleProof, algorithms::Sha256, Hasher, Error, utils};
     /// # use std::convert::TryFrom;
     /// # fn main() -> Result<(), Box<dyn std::error::Error>> {
     /// let leaves = [
@@ -71,7 +71,7 @@ impl<T: Hasher> MerkleTree<T> {
     /// ## Examples
     ///
     /// ```
-    /// # use rs_merkle::{MerkleTree, MerkleProof, algorithms::Sha256, Hasher, Error, utils};
+    /// # use ant_merkle::{MerkleTree, MerkleProof, algorithms::Sha256, Hasher, Error, utils};
     /// # use std::convert::TryFrom;
     /// # fn main() -> Result<(), Box<dyn std::error::Error>> {
     /// let leaves = [
@@ -102,7 +102,7 @@ impl<T: Hasher> MerkleTree<T> {
     /// ## Examples
     ///
     /// ```
-    /// # use rs_merkle::{MerkleTree, MerkleProof, algorithms::Sha256, Hasher, Error, utils};
+    /// # use ant_merkle::{MerkleTree, MerkleProof, algorithms::Sha256, Hasher, Error, utils};
     /// # use std::convert::TryFrom;
     /// # fn main() -> Result<(), Box<dyn std::error::Error>> {
     /// let leaves = [
@@ -170,7 +170,7 @@ impl<T: Hasher> MerkleTree<T> {
     /// ## Examples
     ///
     /// ```
-    /// # use rs_merkle::{MerkleTree, MerkleProof, algorithms::Sha256, Hasher, Error, utils};
+    /// # use ant_merkle::{MerkleTree, MerkleProof, algorithms::Sha256, Hasher, Error, utils};
     /// # use std::convert::TryFrom;
     /// # fn main() -> Result<(), Box<dyn std::error::Error>> {
     /// let leaves: Vec<[u8; 32]> = ["a", "b", "c", "d", "e", "f"]
@@ -207,7 +207,7 @@ impl<T: Hasher> MerkleTree<T> {
     /// Get the root after an insert:
     ///
     /// ```
-    /// # use rs_merkle::{MerkleTree, MerkleProof, algorithms::Sha256, Hasher, Error, utils};
+    /// # use ant_merkle::{MerkleTree, MerkleProof, algorithms::Sha256, Hasher, Error, utils};
     /// # use std::convert::TryFrom;
     /// # fn main() -> Result<(), Box<dyn std::error::Error>> {
     /// let mut merkle_tree = MerkleTree::<Sha256>::new();
@@ -227,7 +227,7 @@ impl<T: Hasher> MerkleTree<T> {
     /// Inserts also can be chained with [`MerkleTree::commit`] for convenience:
     ///
     /// ```
-    /// # use rs_merkle::{MerkleTree, MerkleProof, algorithms::Sha256, Hasher, Error, utils};
+    /// # use ant_merkle::{MerkleTree, MerkleProof, algorithms::Sha256, Hasher, Error, utils};
     /// # use std::convert::TryFrom;
     /// # fn main() -> Result<(), Box<dyn std::error::Error>> {
     /// let mut merkle_tree = MerkleTree::<Sha256>::new();
@@ -254,7 +254,7 @@ impl<T: Hasher> MerkleTree<T> {
     /// ## Examples
     ///
     /// ```
-    /// # use rs_merkle::{MerkleTree, MerkleProof, algorithms::Sha256, Hasher, Error, utils};
+    /// # use ant_merkle::{MerkleTree, MerkleProof, algorithms::Sha256, Hasher, Error, utils};
     /// # use std::convert::TryFrom;
     /// # fn main() -> Result<(), Box<dyn std::error::Error>> {
     /// let mut merkle_tree = MerkleTree::<Sha256>::new();
@@ -286,7 +286,7 @@ impl<T: Hasher> MerkleTree<T> {
     /// ## Examples
     ///
     /// ```
-    /// # use rs_merkle::{MerkleTree, MerkleProof, algorithms::Sha256, Hasher, Error, utils};
+    /// # use ant_merkle::{MerkleTree, MerkleProof, algorithms::Sha256, Hasher, Error, utils};
     /// # use std::convert::TryFrom;
     /// # fn main() -> Result<(), Box<dyn std::error::Error>> {
     /// let mut merkle_tree = MerkleTree::<Sha256>::new();
@@ -322,7 +322,7 @@ impl<T: Hasher> MerkleTree<T> {
     /// ## Examples
     ///
     /// ```
-    /// # use rs_merkle::{MerkleTree, MerkleProof, algorithms::Sha256, Hasher, Error, utils};
+    /// # use ant_merkle::{MerkleTree, MerkleProof, algorithms::Sha256, Hasher, Error, utils};
     /// # fn main() -> Result<(), Box<dyn std::error::Error>> {
     /// let mut merkle_tree = MerkleTree::<Sha256>::new();
     ///
@@ -376,7 +376,7 @@ impl<T: Hasher> MerkleTree<T> {
     /// ### Examples
     ///
     /// ```
-    /// # use rs_merkle::{MerkleTree, MerkleProof, algorithms::Sha256, Hasher, Error, utils};
+    /// # use ant_merkle::{MerkleTree, MerkleProof, algorithms::Sha256, Hasher, Error, utils};
     /// # use std::convert::TryFrom;
     /// # fn main() -> Result<(), Box<dyn std::error::Error>> {
     /// let mut merkle_tree = MerkleTree::<Sha256>::new();
@@ -413,7 +413,7 @@ impl<T: Hasher> MerkleTree<T> {
     /// ## Examples
     ///
     /// ```
-    /// # use rs_merkle::{MerkleTree, MerkleProof, algorithms::Sha256, Hasher, Error, utils};
+    /// # use ant_merkle::{MerkleTree, MerkleProof, algorithms::Sha256, Hasher, Error, utils};
     /// # use std::convert::TryFrom;
     /// # fn main() -> Result<(), Box<dyn std::error::Error>> {
     /// let mut merkle_tree = MerkleTree::<Sha256>::new();
@@ -447,7 +447,7 @@ impl<T: Hasher> MerkleTree<T> {
     /// ## Examples
     ///
     /// ```
-    /// # use rs_merkle::{MerkleTree, MerkleProof, algorithms::Sha256, Hasher, Error, utils};
+    /// # use ant_merkle::{MerkleTree, MerkleProof, algorithms::Sha256, Hasher, Error, utils};
     /// # use std::convert::TryFrom;
     /// # fn main() -> Result<(), Box<dyn std::error::Error>> {
     /// let leaves = [
@@ -479,7 +479,7 @@ impl<T: Hasher> MerkleTree<T> {
     /// # Example
     ///
     /// ```
-    /// use rs_merkle::{MerkleTree, algorithms::Sha256, Hasher};
+    /// use ant_merkle::{MerkleTree, algorithms::Sha256, Hasher};
     ///
     /// let leaves = vec![
     ///     Sha256::hash(b"a"),
@@ -522,7 +522,7 @@ impl<T: Hasher> MerkleTree<T> {
     /// # Example
     ///
     /// ```
-    /// use rs_merkle::{MerkleTree, algorithms::Sha256, Hasher};
+    /// use ant_merkle::{MerkleTree, algorithms::Sha256, Hasher};
     ///
     /// let leaves: Vec<[u8; 32]> = (0..16)
     ///     .map(|i| Sha256::hash(format!("leaf_{}", i).as_bytes()))
@@ -548,6 +548,11 @@ impl<T: Hasher> MerkleTree<T> {
         if level > self.depth() {
             return None;
         }
+        // The node itself must exist at that level.
+        self.layer_tuples()
+            .get(level)?
+            .iter()
+            .find(|(idx, _)| *idx == node_index)?;
 
         let mut proof_hashes = Vec::new();
         let mut current_index = node_index;
@@ -557,7 +562,7 @@ impl<T: Hasher> MerkleTree<T> {
             let nodes_at_level = self.layer_tuples().get(current_level)?;
 
             // Calculate sibling index
-            let sibling_index = if current_index % 2 == 0 {
+            let sibling_index = if current_index.is_multiple_of(2) {
                 current_index + 1
             } else {
                 current_index - 1
@@ -582,7 +587,7 @@ impl<T: Hasher> MerkleTree<T> {
     /// ### Examples
     ///
     /// ```
-    /// # use rs_merkle::{MerkleTree, MerkleProof, algorithms::Sha256, Hasher, Error, utils};
+    /// # use ant_merkle::{MerkleTree, MerkleProof, algorithms::Sha256, Hasher, Error, utils};
     /// # use std::convert::TryFrom;
     /// # fn main() -> Result<(), Box<dyn std::error::Error>> {
     /// let leaves = [
@@ -605,7 +610,7 @@ impl<T: Hasher> MerkleTree<T> {
     /// ## Examples
     ///
     /// ```
-    /// # use rs_merkle::{MerkleTree, MerkleProof, algorithms::Sha256, Hasher, Error, utils};
+    /// # use ant_merkle::{MerkleTree, MerkleProof, algorithms::Sha256, Hasher, Error, utils};
     /// # use std::convert::TryFrom;
     /// # fn main() -> Result<(), Box<dyn std::error::Error>> {
     /// let leaves = [
@@ -672,7 +677,7 @@ impl<T: Hasher> MerkleTree<T> {
         match partial_tree_tuples.first_mut() {
             Some(first_layer) => {
                 first_layer.append(&mut shadow_node_tuples);
-                first_layer.sort_by(|(a, _), (b, _)| a.cmp(b));
+                first_layer.sort_by_key(|(a, _)| *a);
             }
             None => partial_tree_tuples.push(shadow_node_tuples),
         }

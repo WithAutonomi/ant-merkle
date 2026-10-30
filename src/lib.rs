@@ -1,3 +1,4 @@
+//! `ant-merkle` is a fork of `rs-merkle`, maintained for the Autonomi network.
 //! `rs-merkle` is the most advanced Merkle tree library for Rust. Basic features
 //! include building a Merkle tree, creation, and verification of Merkle proofs for
 //! single and multiple elements, i.e. multi-proofs. Advanced features include making
@@ -30,7 +31,7 @@
 //! Basic usage for verifying Merkle proofs:
 //!
 //! ```
-//! # use rs_merkle::{MerkleTree, MerkleProof, algorithms::Sha256, Hasher, Error, utils};
+//! # use ant_merkle::{MerkleTree, MerkleProof, algorithms::Sha256, Hasher, Error, utils};
 //! # use std::convert::TryFrom;
 //! #
 //! # fn main() -> Result<(), Box<dyn std::error::Error>> {
@@ -59,7 +60,7 @@
 //! Advanced usage with rolling several commits back:
 //!
 //! ```
-//! # use rs_merkle::{MerkleTree, algorithms::Sha256, Hasher, Error};
+//! # use ant_merkle::{MerkleTree, algorithms::Sha256, Hasher, Error};
 //! #
 //! # fn main() -> Result<(), Box<dyn std::error::Error>> {
 //! let elements = ["a", "b", "c", "d", "e", "f"];
