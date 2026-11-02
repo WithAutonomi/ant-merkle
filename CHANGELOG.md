@@ -11,6 +11,7 @@
 
 ### Other
 
+* Minimum supported Rust version declared: **1.87** (`rust-version`), for `usize::is_multiple_of`. 1.5.1 declared none.
 * Cargo.toml `repository` and `documentation` now point at WithAutonomi/ant-merkle and docs.rs/ant-merkle.
 
 

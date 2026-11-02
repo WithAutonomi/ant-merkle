@@ -45,7 +45,7 @@ fn flip(mut hash: [u8; 32], byte: usize) -> [u8; 32] {
 fn untampered_proof_verifies() {
     for n in SIZES {
         let f = fixture(n);
-        assert!(f.proof.verify(f.root, &PROVEN, &f.hashes, n), "n={n}");
+        assert!(f.proof.verify(f.root, &PROVEN, &f.hashes, n), "n={}", n);
     }
 }
 
@@ -57,7 +57,9 @@ fn wrong_root_is_rejected() {
             let root = flip(f.root, byte);
             assert!(
                 !f.proof.verify(root, &PROVEN, &f.hashes, n),
-                "n={n} byte={byte}"
+                "n={} byte={}",
+                n,
+                byte
             );
         }
     }
@@ -75,7 +77,9 @@ fn tampered_proof_hash_is_rejected() {
             let proof = MerkleProof::<Sha256>::new(hashes);
             assert!(
                 !proof.verify(f.root, &PROVEN, &f.hashes, n),
-                "n={n} proof hash {i}"
+                "n={} proof hash {}",
+                n,
+                i
             );
         }
     }
@@ -89,19 +93,22 @@ fn wrong_leaf_hash_is_rejected() {
         let outsider = vec![Sha256::hash(b"not a leaf"), f.hashes[1]];
         assert!(
             !f.proof.verify(f.root, &PROVEN, &outsider, n),
-            "n={n} outsider"
+            "n={} outsider",
+            n
         );
         // A real leaf, but from a different position.
         let neighbour = vec![f.leaves[4], f.hashes[1]];
         assert!(
             !f.proof.verify(f.root, &PROVEN, &neighbour, n),
-            "n={n} neighbour"
+            "n={} neighbour",
+            n
         );
         // One bit off.
         let flipped = vec![flip(f.hashes[0], 31), f.hashes[1]];
         assert!(
             !f.proof.verify(f.root, &PROVEN, &flipped, n),
-            "n={n} flipped"
+            "n={} flipped",
+            n
         );
     }
 }
@@ -114,13 +121,17 @@ fn wrong_leaf_index_is_rejected() {
         let swapped = [PROVEN[1], PROVEN[0]];
         assert!(
             !f.proof.verify(f.root, &swapped, &f.hashes, n),
-            "n={n} swapped"
+            "n={} swapped",
+            n
         );
         // Each index shifted by one, either way.
         for (a, b) in [(2, 7), (4, 7), (3, 6), (3, 8)] {
             assert!(
                 !f.proof.verify(f.root, &[a, b], &f.hashes, n),
-                "n={n} [{a}, {b}]"
+                "n={} [{}, {}]",
+                n,
+                a,
+                b
             );
         }
     }
@@ -136,13 +147,16 @@ fn out_of_range_or_duplicate_index_is_rejected() {
         for index in [n, n + 1, usize::MAX] {
             assert!(
                 !single.verify(f.root, &[index], &[f.leaves[3]], n),
-                "n={n} index={index}"
+                "n={} index={}",
+                n,
+                index
             );
         }
         let duplicate = tree.proof(&[3, 3]);
         assert!(
             !duplicate.verify(f.root, &[3, 3], &[f.leaves[3], f.leaves[3]], n),
-            "n={n} duplicate"
+            "n={} duplicate",
+            n
         );
     }
 }
@@ -161,7 +175,12 @@ fn truncated_or_empty_proof_is_rejected() {
             ("empty", vec![]),
         ] {
             let proof = MerkleProof::<Sha256>::new(hashes);
-            assert!(!proof.verify(f.root, &PROVEN, &f.hashes, n), "n={n} {name}");
+            assert!(
+                !proof.verify(f.root, &PROVEN, &f.hashes, n),
+                "n={} {}",
+                n,
+                name
+            );
         }
     }
 }
@@ -172,19 +191,23 @@ fn mismatched_or_missing_inputs_are_rejected() {
         let f = fixture(n);
         assert!(
             !f.proof.verify(f.root, &PROVEN, &f.hashes[..1], n),
-            "n={n} 2 indices, 1 hash"
+            "n={} 2 indices, 1 hash",
+            n
         );
         assert!(
             !f.proof.verify(f.root, &PROVEN[..1], &f.hashes, n),
-            "n={n} 1 index, 2 hashes"
+            "n={} 1 index, 2 hashes",
+            n
         );
         assert!(
             !f.proof.verify(f.root, &[], &[], n),
-            "n={n} nothing to prove"
+            "n={} nothing to prove",
+            n
         );
         assert!(
             !f.proof.verify(f.root, &PROVEN, &f.hashes, 0),
-            "n={n} zero leaves"
+            "n={} zero leaves",
+            n
         );
     }
 }
@@ -197,7 +220,11 @@ fn proof_from_another_tree_is_rejected() {
             .map(|i| Sha256::hash(format!("other-{i}").as_bytes()))
             .collect();
         let other_proof = MerkleTree::<Sha256>::from_leaves(&other).proof(&PROVEN);
-        assert!(!other_proof.verify(f.root, &PROVEN, &f.hashes, n), "n={n}");
+        assert!(
+            !other_proof.verify(f.root, &PROVEN, &f.hashes, n),
+            "n={}",
+            n
+        );
     }
 }
 
@@ -209,7 +236,9 @@ fn total_leaves_count_with_a_different_depth_is_rejected() {
         for count in [1, 5, 8, 17, 32, usize::MAX] {
             assert!(
                 !f.proof.verify(f.root, &PROVEN, &f.hashes, count),
-                "n={n} count={count}"
+                "n={} count={}",
+                n,
+                count
             );
         }
     }
@@ -283,7 +312,8 @@ mod not_bound_by_the_root {
         for count in [9, 11, 12, 15, 16] {
             assert!(
                 f.proof.verify(f.root, &PROVEN, &f.hashes, count),
-                "count={count}"
+                "count={}",
+                count
             );
         }
     }
