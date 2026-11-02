@@ -2,7 +2,7 @@ mod common;
 
 pub mod root {
     use crate::common;
-    use rs_merkle::{
+    use ant_merkle::{
         algorithms::{Sha256, Sha384},
         MerkleTree,
     };
@@ -30,7 +30,7 @@ pub mod root {
 
 pub mod tree_depth {
     use crate::common;
-    use rs_merkle::{algorithms::Sha256, MerkleTree};
+    use ant_merkle::{algorithms::Sha256, MerkleTree};
 
     #[test]
     pub fn should_return_a_correct_tree_depth() {
@@ -45,7 +45,7 @@ pub mod tree_depth {
 
 pub mod proof {
     use crate::common;
-    use rs_merkle::{algorithms::Sha256, MerkleTree};
+    use ant_merkle::{algorithms::Sha256, MerkleTree};
 
     #[test]
     pub fn should_return_a_correct_proof() {
@@ -67,7 +67,7 @@ pub mod proof {
 
 pub mod commit {
     use crate::common;
-    use rs_merkle::{algorithms::Sha256, Hasher, MerkleTree};
+    use ant_merkle::{algorithms::Sha256, Hasher, MerkleTree};
 
     #[test]
     pub fn should_give_correct_root_after_commit() {
@@ -198,7 +198,7 @@ pub mod commit {
 
 pub mod rollback {
 
-    use rs_merkle::{algorithms::Sha256, Hasher, MerkleTree};
+    use ant_merkle::{algorithms::Sha256, Hasher, MerkleTree};
 
     #[test]
     pub fn should_rollback_previous_commit() {
@@ -278,7 +278,7 @@ pub mod rollback {
 }
 
 pub mod get_nodes_at_level {
-    use rs_merkle::{algorithms::Sha256, Hasher, MerkleTree};
+    use ant_merkle::{algorithms::Sha256, Hasher, MerkleTree};
 
     #[test]
     pub fn should_return_nodes_at_leaf_level() {
@@ -389,7 +389,7 @@ pub mod get_nodes_at_level {
 }
 
 pub mod proof_from_node {
-    use rs_merkle::{algorithms::Sha256, Hasher, MerkleTree};
+    use ant_merkle::{algorithms::Sha256, Hasher, MerkleTree};
 
     #[test]
     pub fn should_create_proof_from_intersection_to_root() {

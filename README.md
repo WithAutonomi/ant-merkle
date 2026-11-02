@@ -1,9 +1,11 @@
-# rs-merkle
+# ant-merkle
 
-[![Rayon crate](https://img.shields.io/crates/v/rs_merkle.svg)](https://crates.io/crates/rs_merkle)
-[![Rayon documentation](https://docs.rs/rs_merkle/badge.svg)](https://docs.rs/rs_merkle)
-[![Build and test](https://github.com/antouhou/rs-merkle/actions/workflows/test.yml/badge.svg?branch=master)](https://github.com/antouhou/rs-merkle/actions)
+[![crates.io](https://img.shields.io/crates/v/ant-merkle.svg)](https://crates.io/crates/ant-merkle)
+[![docs.rs](https://docs.rs/ant-merkle/badge.svg)](https://docs.rs/ant-merkle)
+[![Build and test](https://github.com/WithAutonomi/ant-merkle/actions/workflows/test.yml/badge.svg?branch=master)](https://github.com/WithAutonomi/ant-merkle/actions)
 
+`ant-merkle` is a fork of [`rs-merkle`](https://github.com/antouhou/rs-merkle), maintained
+for the Autonomi network (it adds node-level proofs, `MerkleTree::proof_from_node`).
 `rs-merkle` is the most advanced Merkle tree library for Rust. Basic features 
 include building a Merkle tree, creation, and verification of Merkle proofs for 
 single and several elements, i.e. multi-proofs. Advanced features include making 
@@ -13,9 +15,9 @@ tree state, similarly to Git.
 The library is highly customizable. Hashing function and the way how the tree 
 is built can be easily configured through a special trait.
 
-`rs-merkle` is
-[available on crates.io](https://crates.io/crates/rs_merkle), and 
-[API Documentation is available on docs.rs](https://docs.rs/rs_merkle/).
+`ant-merkle` is
+[available on crates.io](https://crates.io/crates/ant-merkle), and 
+[API Documentation is available on docs.rs](https://docs.rs/ant-merkle/).
 
 ## About Merkle trees
 
@@ -37,7 +39,7 @@ Add the following to your `Cargo.toml`:
 
 ```toml
 [dependencies]
-rs_merkle = "1.4"
+ant-merkle = "1.5"
 ```
 
 This crate also can be used on the no-std targets. To use as a dependency 
@@ -45,12 +47,12 @@ in a project that requires no-std, disable default features:
 
 ```toml
 [dependencies]
-rs_merkle = { version = "1.4", default-features = false }
+ant-merkle = { version = "1.5", default-features = false }
 ```
 
 ## Documentation
 
-[Documentation is available on docs.rs](https://docs.rs/rs_merkle/).
+[Documentation is available on docs.rs](https://docs.rs/ant-merkle/).
 
 ## Contributing
 

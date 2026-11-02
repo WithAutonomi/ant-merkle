@@ -68,7 +68,7 @@ impl<T: Hasher> PartialTree<T> {
             if let Some(mut nodes) = reversed_layers.pop() {
                 current_layer.append(&mut nodes);
             }
-            current_layer.sort_by(|(a, _), (b, _)| a.cmp(b));
+            current_layer.sort_by_key(|(a, _)| *a);
 
             // Adding partial layer to the tree
             partial_tree.push(current_layer.clone());
@@ -144,7 +144,7 @@ impl<T: Hasher> PartialTree<T> {
                 combined_layer.append(&mut cloned_other_layer);
             }
 
-            combined_layer.sort_by(|(a, _), (b, _)| a.cmp(b));
+            combined_layer.sort_by_key(|(a, _)| *a);
             self.upsert_layer(layer_index, combined_layer);
         }
     }

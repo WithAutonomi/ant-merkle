@@ -13,13 +13,13 @@ use core::convert::TryFrom;
 ///
 /// MerkleProof requires specifying hashing algorithm and hash size in order to work.
 /// The hashing algorithm is set through the [`Hasher`] trait, which is supplied as a generic
-/// parameter to the [`MerkleProof`]. `rs_merkle` provides some built-in [`Hasher`] implementations,
+/// parameter to the [`MerkleProof`]. `ant_merkle` provides some built-in [`Hasher`] implementations,
 /// for example, [`algorithms::Sha256`]
 ///
 /// ## Examples
 ///
 /// ```
-/// # use rs_merkle::{MerkleTree, MerkleProof, algorithms::Sha256, Hasher, Error, utils};
+/// # use ant_merkle::{MerkleTree, MerkleProof, algorithms::Sha256, Hasher, Error, utils};
 /// # use std::convert::TryFrom;
 /// # fn main() -> Result<(), Box<dyn std::error::Error>> {
 /// let proof_hashes: Vec<[u8; 32]> = vec![
@@ -62,7 +62,7 @@ impl<T: Hasher> MerkleProof<T> {
     ///
     /// ```
     /// # use std::convert::TryFrom;
-    /// # use rs_merkle::{MerkleProof, algorithms::Sha256};
+    /// # use ant_merkle::{MerkleProof, algorithms::Sha256};
     ///
     /// let proof_bytes: Vec<u8> = vec![
     ///     46, 125, 44, 3, 169, 80, 122, 226, 101, 236, 245, 181, 53, 104, 133, 165, 51, 147, 162,
@@ -94,7 +94,7 @@ impl<T: Hasher> MerkleProof<T> {
     ///
     /// ```
     /// # use std::convert::TryFrom;
-    /// # use rs_merkle::{MerkleProof, algorithms::Sha256, proof_serializers};
+    /// # use ant_merkle::{MerkleProof, algorithms::Sha256, proof_serializers};
     /// # fn main() -> Result<(), Box<dyn std::error::Error>> {
     /// let proof_bytes: Vec<u8> = vec![
     ///     229, 160, 31, 238, 20, 224, 237, 92, 72, 113, 79, 34, 24, 15, 37, 173, 131, 101, 181,
@@ -132,10 +132,14 @@ impl<T: Hasher> MerkleProof<T> {
     /// Uses proof to verify that a given set of elements is contained in the original data
     /// set the proof was made for.
     ///
+    /// The root doesn't commit to `total_leaves_count`: any count that gives the same tree
+    /// shape for the proven indices also verifies. Proof hashes after the ones the proof
+    /// needs are ignored. Callers that rely on either value must check it themselves.
+    ///
     /// ## Examples
     ///
     /// ```
-    /// # use rs_merkle::{MerkleTree, MerkleProof, algorithms::Sha256, Hasher, Error, utils};
+    /// # use ant_merkle::{MerkleTree, MerkleProof, algorithms::Sha256, Hasher, Error, utils};
     /// # use std::convert::TryFrom;
     /// # fn main() -> Result<(), Box<dyn std::error::Error>> {
     /// let leaves = [
@@ -175,7 +179,7 @@ impl<T: Hasher> MerkleProof<T> {
     /// ## Examples
     ///
     /// ```
-    /// # use rs_merkle::{MerkleTree, MerkleProof, algorithms::Sha256, Hasher, Error, utils};
+    /// # use ant_merkle::{MerkleTree, MerkleProof, algorithms::Sha256, Hasher, Error, utils};
     /// # use std::convert::TryFrom;
     /// # fn main() -> Result<(), Box<dyn std::error::Error>> {
     /// let leaves = [
@@ -220,7 +224,7 @@ impl<T: Hasher> MerkleProof<T> {
             .zip(leaf_hashes.iter().cloned())
             .collect();
         // Sorting leaves by indexes in case they weren't sorted already
-        leaf_tuples.sort_by(|(a, _), (b, _)| a.cmp(b));
+        leaf_tuples.sort_by_key(|(a, _)| *a);
         // Getting back _sorted_ indices
         let (sorted_indices, _): (Vec<_>, Vec<_>) = leaf_tuples.iter().cloned().unzip();
 
@@ -242,7 +246,7 @@ impl<T: Hasher> MerkleProof<T> {
         match proof_layers.first_mut() {
             Some(first_layer) => {
                 first_layer.append(&mut leaf_tuples);
-                first_layer.sort_by(|(a, _), (b, _)| a.cmp(b));
+                first_layer.sort_by_key(|(a, _)| *a);
             }
             None => proof_layers.push(leaf_tuples),
         }
@@ -260,7 +264,7 @@ impl<T: Hasher> MerkleProof<T> {
     /// ## Examples
     ///
     /// ```
-    /// # use rs_merkle::{MerkleTree, MerkleProof, algorithms::Sha256, Hasher, Error, utils};
+    /// # use ant_merkle::{MerkleTree, MerkleProof, algorithms::Sha256, Hasher, Error, utils};
     /// # use std::convert::TryFrom;
     /// # fn main() -> Result<(), Box<dyn std::error::Error>> {
     /// let leaves = [
@@ -300,7 +304,7 @@ impl<T: Hasher> MerkleProof<T> {
     /// ## Examples
     ///
     /// ```
-    /// # use rs_merkle::{MerkleTree, MerkleProof, algorithms::Sha256, Hasher, Error, utils};
+    /// # use ant_merkle::{MerkleTree, MerkleProof, algorithms::Sha256, Hasher, Error, utils};
     /// # use std::convert::TryFrom;
     /// # fn main() -> Result<(), Box<dyn std::error::Error>> {
     /// let proof_hashes: Vec<[u8; 32]> = vec![
@@ -335,7 +339,7 @@ impl<T: Hasher> MerkleProof<T> {
     /// ## Examples
     ///
     /// ```
-    /// # use rs_merkle::{MerkleTree, MerkleProof, algorithms::Sha256, Hasher, Error, utils};
+    /// # use ant_merkle::{MerkleTree, MerkleProof, algorithms::Sha256, Hasher, Error, utils};
     /// # use std::convert::TryFrom;
     /// # fn main() -> Result<(), Box<dyn std::error::Error>> {
     /// let proof_bytes: Vec<u8> = vec![
@@ -379,7 +383,7 @@ impl<T: Hasher> MerkleProof<T> {
     /// ## Examples
     ///
     /// ```
-    /// # use rs_merkle::{MerkleTree, MerkleProof, algorithms::Sha256, Hasher, Error, utils};
+    /// # use ant_merkle::{MerkleTree, MerkleProof, algorithms::Sha256, Hasher, Error, utils};
     /// # use std::convert::TryFrom;
     /// #
     /// # fn main() -> Result<(), Box<dyn std::error::Error>> {
@@ -421,7 +425,7 @@ impl<T: Hasher> MerkleProof<T> {
     /// ## Examples
     ///
     /// ```
-    /// # use rs_merkle::{
+    /// # use ant_merkle::{
     /// #   MerkleTree, MerkleProof, algorithms::Sha256, Hasher, Error, utils, proof_serializers
     /// # };
     /// # use std::convert::TryFrom;
@@ -467,7 +471,7 @@ impl<T: Hasher> TryFrom<Vec<u8>> for MerkleProof<T> {
     ///
     /// ```
     /// use std::convert::TryFrom;
-    /// use rs_merkle::{MerkleProof, algorithms::Sha256};
+    /// use ant_merkle::{MerkleProof, algorithms::Sha256};
     ///
     /// let proof_bytes: Vec<u8> = vec![
     ///     46, 125, 44, 3, 169, 80, 122, 226, 101, 236, 245, 181, 53, 104, 133, 165, 51, 147, 162,
@@ -494,7 +498,7 @@ impl<T: Hasher> TryFrom<&[u8]> for MerkleProof<T> {
     ///
     /// ```
     /// use std::convert::TryFrom;
-    /// use rs_merkle::{MerkleProof, algorithms::Sha256};
+    /// use ant_merkle::{MerkleProof, algorithms::Sha256};
     ///
     /// let proof_bytes: Vec<u8> = vec![
     ///     46, 125, 44, 3, 169, 80, 122, 226, 101, 236, 245, 181, 53, 104, 133, 165, 51, 147, 162,

@@ -6,7 +6,7 @@ use sha2::{digest::FixedOutput, Digest, Sha256};
 /// # Examples
 ///
 /// ```
-/// # use rs_merkle::{MerkleTree, MerkleProof, algorithms::Sha256, Hasher, Error, utils};
+/// # use ant_merkle::{MerkleTree, MerkleProof, algorithms::Sha256, Hasher, Error, utils};
 /// # use std::convert::TryFrom;
 /// #
 /// # fn main() -> Result<(), Box<dyn std::error::Error>> {

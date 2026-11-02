@@ -1,10 +1,10 @@
-use rayon::prelude::*;
 #[cfg(feature = "keccak256")]
-use rs_merkle::algorithms::Keccak256;
-use rs_merkle::{
+use ant_merkle::algorithms::Keccak256;
+use ant_merkle::{
     algorithms::{Sha256, Sha384},
     Hasher, MerkleTree,
 };
+use rayon::prelude::*;
 
 pub struct TestData {
     pub leaf_values: Vec<String>,

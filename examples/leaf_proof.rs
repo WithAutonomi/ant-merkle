@@ -14,7 +14,7 @@
 // Path: c → N2 → ROOT
 // Siblings needed: [b, N1]
 
-use rs_merkle::{algorithms::Sha256, Hasher, MerkleTree};
+use ant_merkle::{algorithms::Sha256, Hasher, MerkleTree};
 
 fn main() {
     // Build tree

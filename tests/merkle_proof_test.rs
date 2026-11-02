@@ -2,12 +2,12 @@ mod common;
 
 pub mod root {
     use crate::common;
-    use rayon::prelude::*;
     #[cfg(feature = "keccak256")]
-    use rs_merkle::algorithms::Keccak256;
-    use rs_merkle::{
+    use ant_merkle::algorithms::Keccak256;
+    use ant_merkle::{
         algorithms::Sha256, proof_serializers::DirectHashesOrder, Error, MerkleProof, MerkleTree,
     };
+    use rayon::prelude::*;
     use std::time::Instant;
 
     #[test]
@@ -176,7 +176,7 @@ pub mod root {
 
 pub mod to_bytes {
     use crate::common;
-    use rs_merkle::{algorithms::Sha256, MerkleTree};
+    use ant_merkle::{algorithms::Sha256, MerkleTree};
 
     #[test]
     pub fn should_correctly_serialize_to_bytes() {
@@ -202,7 +202,7 @@ pub mod to_bytes {
 
 pub mod from_bytes {
 
-    use rs_merkle::{algorithms::Sha256, Error, MerkleProof};
+    use ant_merkle::{algorithms::Sha256, Error, MerkleProof};
 
     #[test]
     pub fn should_return_result_with_proof() -> Result<(), Error> {

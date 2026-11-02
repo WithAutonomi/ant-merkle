@@ -22,7 +22,7 @@
 // Key insight: We treat N0, N1, N2, N3 as "leaves" of a smaller tree
 // Then verify using standard MerkleProof::verify()!
 
-use rs_merkle::{algorithms::Sha256, Hasher, MerkleTree};
+use ant_merkle::{algorithms::Sha256, Hasher, MerkleTree};
 
 fn main() {
     // Build tree
